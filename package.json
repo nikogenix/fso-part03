@@ -1,0 +1,27 @@
+{
+	"name": "fso-part03",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"dev": "nodemon index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nikogenix/fso-part03.git"
+	},
+	"author": "nikogenix",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/nikogenix/fso-part03/issues"
+	},
+	"homepage": "https://github.com/nikogenix/fso-part03#readme",
+	"dependencies": {
+		"express": "^4.18.2"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.22"
+	}
+}
