@@ -3,6 +3,27 @@ const app = express();
 
 app.use(express.json());
 
+const morgan = require("morgan");
+
+morgan.token("content", function (req, res) {
+	if (req.method === "POST") return JSON.stringify(req.body);
+});
+
+app.use(
+	morgan(function (tokens, req, res) {
+		return [
+			tokens.method(req, res),
+			tokens.url(req, res),
+			tokens.status(req, res),
+			tokens.res(req, res, "content-length"),
+			"-",
+			tokens["response-time"](req, res),
+			"ms",
+			tokens["content"](req, res),
+		].join(" ");
+	})
+);
+
 let persons = [
 	{
 		id: 1,
@@ -62,8 +83,6 @@ app.post("/api/persons", (req, res) => {
 	const nameDupe = persons.filter((p) => p.name === name).length > 0 ? true : false;
 	const numberDupe = persons.filter((p) => p.number === number).length > 0 ? true : false;
 	const id = parseInt(Math.random() * 123456789);
-
-	console.log(name, number, nameDupe, numberDupe);
 
 	if (!name || !number) {
 		return res.status(400).json({ error: "missing info. submitting a name and number is mandatory" }).end();
