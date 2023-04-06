@@ -86,8 +86,14 @@ app.put("/api/persons/:id", (req, res, next) => {
 	};
 
 	Person.findByIdAndUpdate(req.params.id, person, { new: true, runValidators: true, context: "query" })
-		.then((person) => res.json(person))
-		.catch((err) => next(err));
+		.then((person) => {
+			if (person) res.json(person);
+			else res.status(404).end();
+		})
+		.catch((err) => {
+			console.log(err);
+			next(err);
+		});
 });
 
 const unknownEndpoint = (request, response) => {
