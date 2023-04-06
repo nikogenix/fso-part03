@@ -6,7 +6,7 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const db = `mongodb+srv://nikogenix:${process.env.MONGODB_PASSWORD}@cluster0.mnl0osy.mongodb.net/phonebookApp?retryWrites=true&w=majority`;
+const db = process.env.MONGODB_URI;
 
 if (process.argv.length === 2) {
 	mongoose.set("strictQuery", false);
